@@ -1,15 +1,20 @@
 package com.mycompany.app;
 
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Hello world!
  *
  */
-@RestController
+
+// @RestController simply returns the object and object data is directly written into HTTP response as JSON or XML.
+// Equivalent to @Controller + @ResponseBody 
+// @Controller gets the html page.
+@Controller
 @SpringBootApplication
 public class App 
 {
@@ -17,8 +22,22 @@ public class App
         SpringApplication.run(App.class, args);
     }
 
-    @RequestMapping("/")
+    // @GetMapping short for @RequestMapping(method = { RequestMethod.GET })
+    // @ResponseBody indicates a method return value should be bound to the web response body i.e.
+    // no view resolver is needed.
+    @ResponseBody
+    @GetMapping("/hello")
     String hello() {
-        return "Hello, world";
+        return "Hello, World!";
+    }
+
+    @GetMapping("/")
+    String index() {
+        return login();
+    }
+    
+    @GetMapping("/login")
+    String login() {
+        return "login";
     }
 }
