@@ -8,9 +8,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.Map;
 
 import com.mycompany.login.LoginController;
+import com.mycompany.login.LoginController.LoginResult;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -29,7 +32,7 @@ public class App
         SpringApplication.run(App.class, args);
     }
 
-    // @GetMapping short for @RequestMapping(method = { RequestMethod.GET })
+    // @GetMapping is short for @RequestMapping(method = { RequestMethod.GET })
     // @ResponseBody indicates a method return value should be bound to the web response body i.e.
     // no view resolver is needed.
     @ResponseBody
@@ -50,8 +53,8 @@ public class App
 
     @ResponseBody
     @PostMapping("/login/user")
-    Map<String, String> loginUser(@RequestBody Map<String, Object> payload) {
+    ResponseEntity<LoginResult> loginUser(@RequestBody LoginController controller) {
         System.out.println("!RECEIVED!");
-        return LoginController.validateCredentials(payload);
+        return new ResponseEntity<>(controller.validateCredentials(), HttpStatus.OK);
     }
 }
