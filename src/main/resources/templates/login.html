@@ -4,14 +4,18 @@
         <link rel="stylesheet" type="text/css" href="/css/login.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="/js/login.js"></script>
-        <script src="/ts/login.ts"></script>
         <title>Page Title</title>
     </head>
 
     <body>
         <h1>This is a Heading</h1>
-        <p id="paragraph">This is a paragraph.</p>
-        <button id="jsButton">Click me</button>
-        <button onclick="myTsFunction()">Click me for typescript</button>
+        <p id="paragraph">Enter your credentials.</p>
+        <form>
+            Username:<br>
+            <input id="username" type="text" name="firstname"><br>
+            Password:<br>
+            <input id="password" type="text" name="lastname">
+          </form>
+          <button id="jsButton">Login</button>
     </body>
 </html>

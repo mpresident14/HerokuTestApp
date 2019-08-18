@@ -1,18 +1,29 @@
 function myFunction() {
-    let data = {'username':'paul', 'password':'12345'};
+    let data = {
+        'username': $("#username").val(), 
+        'password': $("#password").val()
+    };
+    
+    postJson(
+        "/login/user", 
+        data, 
+        response => $("#paragraph").text(response.result),
+        function(xhr, status, error) {
+            $("#paragraph").text(status);
+            console.log(error);
+        }
+    );
+}
+
+function postJson(url, data, successFn, errorFn) {
     $.ajax({
-        url: "/login/user",
+        url: url,
         type: "POST",
         contentType:'application/json',
         data: JSON.stringify(data),
         dataType:'JSON',
-        success: function(response) {
-            $("#paragraph").text(response.result);
-        },
-        error: function(xhr, status, error) {
-            console.log(error);
-            $("#paragraph").text(status);
-        },
+        success: successFn,
+        error: errorFn
     });
 }
 

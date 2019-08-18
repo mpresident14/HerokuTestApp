@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Map;
 
+import com.mycompany.login.LoginController;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -49,13 +51,7 @@ public class App
     @ResponseBody
     @PostMapping("/login/user")
     Map<String, String> loginUser(@RequestBody Map<String, Object> payload) {
-        Map<String, String> nameToPassword = Map.of("paul", "12345");
-        Object username = payload.get("username");
-        Object password = payload.get("password");
         System.out.println("!RECEIVED!");
-        if (password.equals(nameToPassword.get(username))) {
-            return Map.of("result", "valid");
-        }
-        return Map.of("result", "invalid");
+        return LoginController.validateCredentials(payload);
     }
 }
